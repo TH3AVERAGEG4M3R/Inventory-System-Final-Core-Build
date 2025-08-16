@@ -1,0 +1,32 @@
+{
+        "FileVersion": 3,
+        "EngineAssociation": "5.5",
+        "Category": "",
+        "Description": "Complete Spatial Inventory System for Unreal Engine",
+        "Modules": [
+                {
+                        "Name": "InventorySystem",
+                        "Type": "Runtime",
+                        "LoadingPhase": "Default",
+                        "AdditionalDependencies": [
+                                "Engine",
+                                "CoreUObject",
+                                "UMG",
+                                "Slate",
+                                "SlateCore"
+                        ]
+                }
+        ],
+        "Plugins": [
+                {
+                        "Name": "ModelingToolsEditorMode",
+                        "Enabled": true,
+                        "TargetAllowList": [
+                                "Editor"
+                        ]
+                }
+        ],
+        "TargetPlatforms": [
+                "Windows"
+        ]
+}

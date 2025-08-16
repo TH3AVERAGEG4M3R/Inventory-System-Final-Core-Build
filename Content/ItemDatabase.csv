@@ -1,0 +1,21 @@
+Name,ItemName,Description,ItemType,Rarity,EquipmentSlot,ItemSize.X,ItemSize.Y,Weight,MaxStackSize,bHasInventorySlots,ContainerData.ContainerName,ContainerData.InventoryWidth,ContainerData.InventoryHeight,ContainerData.WeightLimit
+BasicSword,Basic Sword,A simple iron sword for combat,Equipment,Common,PrimaryWeapon,1,3,2.5,1,FALSE,,,,,
+IronHelmet,Iron Helmet,Protective headgear made of iron,Equipment,Common,Helmet,2,2,1.8,1,FALSE,,,,,
+LeatherArmor,Leather Armor,Basic leather chest protection,Equipment,Common,Chest,2,3,3.2,1,FALSE,,,,,
+SmallBackpack,Small Backpack,A basic backpack for carrying items,Equipment,Common,Backpack,2,2,1.0,1,TRUE,SmallBackpackInventory,6,6,25.0
+TacticalVest,Tactical Vest,Military vest with multiple pockets,Equipment,Uncommon,Vest,2,2,2.5,1,TRUE,TacticalVestInventory,8,4,15.0
+MediumBackpack,Medium Backpack,A larger backpack for extended journeys,Equipment,Uncommon,Backpack,2,3,1.5,1,TRUE,MediumBackpackInventory,8,8,40.0
+CombatBoots,Combat Boots,Sturdy military boots,Equipment,Common,Boots,2,1,1.2,1,FALSE,,,,,
+TacticalGloves,Tactical Gloves,Fingerless gloves for better grip,Equipment,Common,Gloves,1,1,0.3,1,FALSE,,,,,
+HealthPotion,Health Potion,Restores 50 health points,Consumable,Common,None,1,1,0.2,5,FALSE,,,,,
+ManaPotion,Mana Potion,Restores 30 mana points,Consumable,Common,None,1,1,0.2,5,FALSE,,,,,
+IronIngot,Iron Ingot,Raw iron material for crafting,Material,Common,None,1,1,2.0,10,FALSE,,,,,
+WoodPlank,Wood Plank,Processed wood for construction,Material,Common,None,1,1,0.5,20,FALSE,,,,,
+GoldCoin,Gold Coin,Standard currency,Material,Common,None,1,1,0.01,100,FALSE,,,,,
+MasterKey,Master Key,Opens all doors in the dungeon,Key,Rare,None,1,1,0.1,1,FALSE,,,,,
+EnchantedSword,Enchanted Sword,A magical sword with fire damage,Equipment,Epic,PrimaryWeapon,1,3,3.0,1,FALSE,,,,,
+DragonScaleArmor,Dragon Scale Armor,Legendary armor made from dragon scales,Equipment,Legendary,Chest,2,3,8.0,1,FALSE,,,,,
+UtilityBelt,Utility Belt,Belt with multiple tool pouches,Equipment,Uncommon,Accessory1,2,1,0.8,1,TRUE,UtilityBeltInventory,6,2,8.0
+MagicRing,Magic Ring,Increases mana regeneration,Equipment,Rare,Accessory2,1,1,0.05,1,FALSE,,,,,
+LargeBackpack,Large Backpack,Professional hiking backpack,Equipment,Rare,Backpack,2,3,2.0,1,TRUE,LargeBackpackInventory,10,10,60.0
+StealthCloak,Stealth Cloak,Provides invisibility when equipped,Equipment,Epic,Chest,2,3,1.5,1,TRUE,SteathCloakInventory,4,4,10.0

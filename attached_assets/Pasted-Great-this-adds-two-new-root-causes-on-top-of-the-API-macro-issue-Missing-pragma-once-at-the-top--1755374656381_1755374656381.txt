@@ -1,0 +1,274 @@
+Great—this adds two new root causes on top of the API-macro issue:
+
+Missing #pragma once at the top of your headers → causes UHT’s
+"...generated.h already included, missing '#pragma once'...".
+
+Include order (the *.generated.h must be the last include in each header).
+If it isn’t, UHT can mis-generate glue code and you’ll get the same “inconsistent dll linkage” spam.
+
+Below is a clean, copy-pasteable pattern for each file type. Apply it to every Unreal header you listed.
+
+Fix order (do this exactly)
+
+In every Unreal header (*.h):
+
+Put #pragma once on line 1.
+
+Ensure the module API macro is on all UCLASS/USTRUCT (not on UENUM).
+
+Put the matching *.generated.h as the last include in that header.
+
+Remove any *.generated.h includes from .cpp files.
+
+Remove INVENTORYSYSTEM_API from all UENUMs and make them : uint8.
+
+For any static members (e.g., ManagerInstance), export in the declaration (header via class API), but not in the .cpp definition.
+
+Break circular includes with forward declarations (include the full header in the .cpp instead).
+
+Clean build: close the editor, delete Binaries/, Intermediate/, .vs/, then Regenerate Project Files and build Development Editor.
+
+Templates you can copy
+BP_InventoryManager.h
+#pragma once
+
+#include "CoreMinimal.h"
+#include "GameFramework/Actor.h"
+#include "BP_InventoryManager.generated.h" // ALWAYS LAST
+
+UCLASS()
+class INVENTORYSYSTEM_API ABP_InventoryManager : public AActor
+{
+    GENERATED_BODY()
+
+public:
+    ABP_InventoryManager();
+    virtual ~ABP_InventoryManager() override;
+
+    virtual void BeginPlay() override;
+    virtual void Tick(float DeltaSeconds) override;
+
+    // Example static instance (declare here, define in .cpp)
+    static ABP_InventoryManager* ManagerInstance;
+
+    // UFUNCTIONs (no API macro needed on each function)
+    UFUNCTION(BlueprintCallable, Category="Inventory")
+    UObject* CreateItemFromID(FName ItemID);
+
+    UFUNCTION(BlueprintCallable, Category="Inventory")
+    UObject* CreateItemFromDataTable(class UDataTable* Table, FName RowName);
+
+    // ...other UFUNCTIONs
+};
+
+BP_InventoryManager.cpp
+#include "BP_InventoryManager.h"
+#include "Engine/DataTable.h" // example includes needed by cpp
+
+ABP_InventoryManager* ABP_InventoryManager::ManagerInstance = nullptr;
+
+ABP_InventoryManager::ABP_InventoryManager() {}
+ABP_InventoryManager::~ABP_InventoryManager() {}
+
+void ABP_InventoryManager::BeginPlay()
+{
+    Super::BeginPlay();
+}
+
+void ABP_InventoryManager::Tick(float DeltaSeconds)
+{
+    Super::Tick(DeltaSeconds);
+}
+
+BP_InventoryComponent.h
+#pragma once
+
+#include "CoreMinimal.h"
+#include "Components/ActorComponent.h"
+#include "BP_InventoryComponent.generated.h" // ALWAYS LAST
+
+// Forward declarations to avoid circular includes
+class UInventoryItem;
+
+USTRUCT(BlueprintType)
+struct INVENTORYSYSTEM_API FInventoryGrid
+{
+    GENERATED_BODY()
+
+    // fields...
+};
+
+USTRUCT(BlueprintType)
+struct INVENTORYSYSTEM_API FEquipmentSlotData
+{
+    GENERATED_BODY()
+
+    // fields...
+};
+
+UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
+class INVENTORYSYSTEM_API UBP_InventoryComponent : public UActorComponent
+{
+    GENERATED_BODY()
+
+public:
+    UBP_InventoryComponent();
+    virtual ~UBP_InventoryComponent() override;
+
+    virtual void BeginPlay() override;
+
+    UFUNCTION(BlueprintCallable, Category="Inventory")
+    bool AddItemToInventory(UInventoryItem* Item);
+
+    // ...all your other UFUNCTIONs
+};
+
+InventoryItem.h
+#pragma once
+
+#include "CoreMinimal.h"
+#include "UObject/Object.h"
+#include "Engine/DataTable.h" // if you use FTableRowBase
+#include "InventoryItem.generated.h" // ALWAYS LAST
+
+USTRUCT(BlueprintType)
+struct INVENTORYSYSTEM_API FItemDataTableRow : public FTableRowBase
+{
+    GENERATED_BODY()
+    // Data row fields...
+};
+
+UCLASS(BlueprintType, Blueprintable)
+class INVENTORYSYSTEM_API UInventoryItem : public UObject
+{
+    GENERATED_BODY()
+
+public:
+    UInventoryItem();
+    virtual ~UInventoryItem() override;
+
+    UFUNCTION(BlueprintCallable, Category="Item")
+    bool CanStackWith(const UInventoryItem* Other) const;
+
+    // ...other UFUNCTIONs
+};
+
+BP_ExampleCharacter.h
+#pragma once
+
+#include "CoreMinimal.h"
+#include "GameFramework/Character.h"
+#include "BP_ExampleCharacter.generated.h" // ALWAYS LAST
+
+class UBP_InventoryComponent;
+
+UCLASS()
+class INVENTORYSYSTEM_API ABP_ExampleCharacter : public ACharacter
+{
+    GENERATED_BODY()
+
+public:
+    ABP_ExampleCharacter();
+    virtual ~ABP_ExampleCharacter() override;
+
+    virtual void BeginPlay() override;
+    virtual void Tick(float DeltaSeconds) override;
+    virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+    UFUNCTION(BlueprintCallable, Category="Stats")
+    float GetTotalStat(FName StatName) const;
+
+    // ...
+};
+
+BP_InventoryPlayerController.h
+#pragma once
+
+#include "CoreMinimal.h"
+#include "GameFramework/PlayerController.h"
+#include "BP_InventoryPlayerController.generated.h" // ALWAYS LAST
+
+class UBP_InventoryComponent;
+
+UCLASS()
+class INVENTORYSYSTEM_API ABP_InventoryPlayerController : public APlayerController
+{
+    GENERATED_BODY()
+
+public:
+    ABP_InventoryPlayerController();
+    virtual ~ABP_InventoryPlayerController() override;
+
+    virtual void BeginPlay() override;
+    virtual void SetupInputComponent() override;
+
+    UFUNCTION(BlueprintCallable, Category="Inventory")
+    void ToggleInventory();
+
+    // ...
+};
+
+Enums (no API macro; must be : uint8)
+#pragma once
+
+#include "CoreMinimal.h"
+#include "YourEnums.generated.h" // name as you like; ALWAYS LAST
+
+UENUM(BlueprintType)
+enum class EItemType : uint8
+{
+    Consumable,
+    Weapon,
+    Armor,
+    QuestItem
+};
+
+UENUM(BlueprintType)
+enum class EItemRarity : uint8
+{
+    Common,
+    Uncommon,
+    Rare,
+    Epic,
+    Legendary
+};
+
+UENUM(BlueprintType)
+enum class EEquipmentSlot : uint8
+{
+    Head,
+    Chest,
+    Legs,
+    Hands,
+    Weapon
+};
+
+
+Place enums in their own header if multiple classes include them, so you keep include order clean.
+
+Delegate notes
+
+Usually you don’t add the API macro to DECLARE_*DELEGATE* lines. If you need to export the signature across modules, wrap the delegate in an exported struct/class or place it in a header already compiled in this module.
+
+Example:
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryChanged);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEquipmentChanged);
+
+Quick checklist against your errors
+
+[x] Every header starts with #pragma once.
+
+[x] Each header ends its includes with ThatHeader.generated.h.
+
+[x] No .cpp includes any *.generated.h.
+
+[x] All UCLASS/USTRUCT/UINTERFACE have INVENTORYSYSTEM_API.
+
+[x] No UENUM has the API macro; all are : uint8.
+
+[x] Static members defined only in .cpp.
+
+[x] Forward-declare wherever possible to break include cycles.
+
+[x] Clean & regenerate project files before rebuilding.

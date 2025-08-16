@@ -1,0 +1,32 @@
+====================================
+   INVENTORY SYSTEM - INSTANT SETUP
+====================================
+
+REQUIREMENTS:
+✓ Unreal Engine 5.5.4 (optimized for this version)
+✓ Visual Studio 2019/2022 with C++ tools
+
+SETUP (5 MINUTES):
+1. Double-click "GenerateProjectFiles.bat"
+2. Open "InventorySystem.sln" in Visual Studio  
+3. Set config to "Development Editor"
+4. Build (Ctrl+Shift+B)
+5. Open "InventorySystem.uproject" in UE
+6. Press TAB in play mode!
+
+WHAT YOU GET:
+✓ Complete spatial inventory system
+✓ 12 equipment slots (helmet, armor, weapons, etc.)
+✓ Grid-based inventory with drag & drop
+✓ Container clothing (backpacks, vests)
+✓ Example character with test items
+✓ Full Blueprint integration
+✓ Professional documentation
+
+CONTROLS:
+TAB = Open/Close Inventory
+E = Quick Use (future feature)
+
+NO EDITING REQUIRED - EVERYTHING WORKS OUT OF THE BOX!
+
+For detailed docs, see Documentation/ folder or README.md

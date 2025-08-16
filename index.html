@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spatial Inventory System for Unreal Engine</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        
+        .nav {
+            background: #34495e;
+            padding: 15px 30px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        
+        .nav a:hover {
+            background: #3498db;
+        }
+        
+        .nav a.active {
+            background: #3498db;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-left: 4px solid #3498db;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            font-size: 1.3em;
+        }
+        
+        .demo-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .file-list {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .file-category {
+            margin-bottom: 25px;
+        }
+        
+        .file-category h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .file-icon {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            border-radius: 5px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+        
+        .file-info h4 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 0.9em;
+        }
+        
+        .file-info p {
+            margin: 5px 0 0 0;
+            color: #7f8c8d;
+            font-size: 0.8em;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 10px 10px 10px 0;
+            transition: transform 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(45deg, #95a5a6, #7f8c8d);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Spatial Inventory System</h1>
+            <p>Complete Blueprint Solution for Unreal Engine</p>
+        </div>
+        
+        <div class="nav">
+            <a href="#overview" class="active">Overview</a>
+            <a href="/Examples/SpatialInventoryExample.html">Interactive Demo</a>
+            <a href="/Documentation/QuickStart.md">Quick Start (15min)</a>
+            <a href="/Documentation/UnrealEngineSetup.md">Full Setup Guide</a>
+            <a href="/Documentation/InventorySystemGuide.md">API Documentation</a>
+            <a href="#files">Source Files</a>
+        </div>
+        
+        <div class="content">
+            <div class="highlight-box">
+                <h3>Professional Spatial Inventory System</h3>
+                <p>Complete C++ and Blueprint implementation with equipment slots, container clothing, and spatial grid management</p>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <h3>🎯 12 Equipment Slots</h3>
+                    <p>Helmet, Chest, Legs, Boots, Gloves, Backpack, Vest, Primary Weapon, Secondary Weapon, Melee, and 2 Accessory slots with configurable restrictions.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>📦 Spatial Grid System</h3>
+                    <p>Items occupy space based on their size (width x height). Drag-and-drop with visual feedback for valid/invalid placement zones.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>👕 Container Clothing</h3>
+                    <p>Backpacks, vests, and clothing can have their own inventory spaces with customizable sizes, weight limits, and item type filters.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>⚡ Dynamic Management</h3>
+                    <p>Real-time inventory updates, automatic weight calculation, durability tracking, item stacking, and rarity-based color coding.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>🎨 Complete UI System</h3>
+                    <p>Professional UMG interface with full drag-and-drop support, equipment visualization, and responsive design for all screen sizes.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>🔧 Blueprint Integration</h3>
+                    <p>Fully exposed to Blueprint with comprehensive documentation, example implementations, and easy integration into existing projects.</p>
+                </div>
+            </div>
+            
+            <div class="demo-section">
+                <h2>System Components</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div style="text-align: center; padding: 20px; background: white; border-radius: 10px;">
+                        <h4>Core System</h4>
+                        <p>BP_InventoryComponent<br>InventoryItem<br>Data Structures</p>
+                    </div>
+                    <div style="text-align: center; padding: 20px; background: white; border-radius: 10px;">
+                        <h4>UI Components</h4>
+                        <p>WBP_MainInventory<br>WBP_InventoryGrid<br>WBP_EquipmentSlot</p>
+                    </div>
+                    <div style="text-align: center; padding: 20px; background: white; border-radius: 10px;">
+                        <h4>Management</h4>
+                        <p>BP_InventoryManager<br>Item Factory<br>Data Tables</p>
+                    </div>
+                    <div style="text-align: center; padding: 20px; background: white; border-radius: 10px;">
+                        <h4>Examples</h4>
+                        <p>Character Integration<br>Item Database<br>Demo Implementation</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="file-list" id="files">
+                <h2>Complete Source Files</h2>
+                
+                <div class="file-category">
+                    <h3>Core Inventory System</h3>
+                    <div class="file-item">
+                        <div class="file-icon">H</div>
+                        <div class="file-info">
+                            <h4>BP_InventoryComponent.h/.cpp</h4>
+                            <p>Main component handling all inventory logic, equipment, and containers</p>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <div class="file-icon">H</div>
+                        <div class="file-info">
+                            <h4>InventoryStructs.h</h4>
+                            <p>Data structures for items, equipment slots, and inventory grids</p>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <div class="file-icon">H</div>
+                        <div class="file-info">
+                            <h4>InventoryItem.h/.cpp</h4>
+                            <p>Base item class with container support and durability system</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="file-category">
+                    <h3>UI System</h3>
+                    <div class="file-item">
+                        <div class="file-icon">UI</div>
+                        <div class="file-info">
+                            <h4>WBP_MainInventory.h</h4>
+                            <p>Main inventory interface with equipment and container panels</p>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <div class="file-icon">UI</div>
+                        <div class="file-info">
+                            <h4>WBP_InventoryGrid.h/.cpp</h4>
+                            <p>Grid-based inventory display with drag-and-drop support</p>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <div class="file-icon">UI</div>
+                        <div class="file-info">
+                            <h4>WBP_EquipmentSlot.h</h4>
+                            <p>Equipment slot widgets with type restrictions</p>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <div class="file-icon">UI</div>
+                        <div class="file-info">
+                            <h4>ItemDragDropOperation.h/.cpp</h4>
+                            <p>Drag-and-drop operation handling for items</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="file-category">
+                    <h3>Management & Examples</h3>
+                    <div class="file-item">
+                        <div class="file-icon">BP</div>
+                        <div class="file-info">
+                            <h4>BP_InventoryManager.h/.cpp</h4>
+                            <p>Item factory and database management system</p>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <div class="file-icon">BP</div>
+                        <div class="file-info">
+                            <h4>BP_ExampleCharacter.h/.cpp</h4>
+                            <p>Complete character integration with stats and usage</p>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <div class="file-icon">📊</div>
+                        <div class="file-info">
+                            <h4>ItemDatabase.csv</h4>
+                            <p>Example item data with 20 different items including containers</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="file-category">
+                    <h3>Documentation</h3>
+                    <div class="file-item">
+                        <div class="file-icon">📖</div>
+                        <div class="file-info">
+                            <h4>InventorySystemGuide.md</h4>
+                            <p>Complete setup guide, API reference, and usage examples</p>
+                        </div>
+                    </div>
+                    <div class="file-item">
+                        <div class="file-icon">🌐</div>
+                        <div class="file-info">
+                            <h4>SpatialInventoryExample.html</h4>
+                            <p>Interactive demo showing system capabilities</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="/Examples/SpatialInventoryExample.html" class="btn">View Interactive Demo</a>
+                <a href="/Documentation/QuickStart.md" class="btn">Quick Start Guide</a>
+                <a href="/Documentation/UnrealEngineSetup.md" class="btn btn-secondary">Full Setup Guide</a>
+            </div>
+            
+            <div style="background: #2c3e50; color: white; padding: 30px; border-radius: 10px; margin-top: 30px; text-align: center;">
+                <h3>Ready for Production</h3>
+                <p>This complete spatial inventory system includes all source files, comprehensive documentation, and working examples. Designed for easy integration into any Unreal Engine project with full Blueprint support and professional-grade architecture.</p>
+                
+                <div style="margin-top: 20px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 5px;">
+                    <h4>Key Features Summary:</h4>
+                    <p style="margin: 10px 0;">✓ 12 Equipment Slots with Type Restrictions<br>
+                    ✓ Spatial Grid Inventory with Drag-and-Drop<br>
+                    ✓ Container Clothing with Custom Inventory Spaces<br>
+                    ✓ Complete UMG Interface with Professional Design<br>
+                    ✓ Item Factory and Database Management<br>
+                    ✓ Character Integration with Stats and Weight System<br>
+                    ✓ Durability, Rarity, and Stacking Systems<br>
+                    ✓ Full Blueprint Exposure and Documentation</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

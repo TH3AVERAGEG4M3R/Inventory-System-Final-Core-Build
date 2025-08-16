@@ -1,0 +1,22 @@
+The command ""C:\Program Files\Epic Games\UE_5.5\Engine\Build\BatchFiles\Rebuild.bat" InventorySystemEditor Win64 DebugGame -Project="C:\Users\chris\Documents\Unreal Projects\InventorySystem\InventorySystem.uproject" -WaitMutex -FromMsBuild -architecture=x64" exited with code -1.
+The type name 'astcenc' only contains lower-cased ascii characters. Such names may become reserved for the language.
+The type name 'coremod' only contains lower-cased ascii characters. Such names may become reserved for the language.
+The type name 'heapprofd' only contains lower-cased ascii characters. Such names may become reserved for the language.
+The type name 'jemalloc' only contains lower-cased ascii characters. Such names may become reserved for the language.
+The type name 'libav' only contains lower-cased ascii characters. Such names may become reserved for the language.
+The type name 'libcurl' only contains lower-cased ascii characters. Such names may become reserved for the language.
+The type name 'libpas' only contains lower-cased ascii characters. Such names may become reserved for the language.
+The type name 'libstrophe' only contains lower-cased ascii characters. Such names may become reserved for the language.
+The type name 'libzip' only contains lower-cased ascii characters. Such names may become reserved for the language.
+The type name 'metis' only contains lower-cased ascii characters. Such names may become reserved for the language.
+The type name 'mimalloc' only contains lower-cased ascii characters. Such names may become reserved for the language.
+The type name 'nanoflann' only contains lower-cased ascii characters. Such names may become reserved for the language.
+The type name 'portmidi' only contains lower-cased ascii characters. Such names may become reserved for the language.
+The type name 'xxhash' only contains lower-cased ascii characters. Such names may become reserved for the language.
+The type name 'zlib' only contains lower-cased ascii characters. Such names may become reserved for the language.
+'EngineIncludeOrderVersion.Unreal5_3' is obsolete: 'The Unreal 5.3 include order is deprecated and will be unsupported in 5.6.'
+'EngineIncludeOrderVersion.Unreal5_3' is obsolete: 'The Unreal 5.3 include order is deprecated and will be unsupported in 5.6.'
+'EngineIncludeOrderVersion.Unreal5_3' is obsolete: 'The Unreal 5.3 include order is deprecated and will be unsupported in 5.6.'
+'EngineIncludeOrderVersion.Unreal5_3' is obsolete: 'The Unreal 5.3 include order is deprecated and will be unsupported in 5.6.'
+The specifier 'CallInEditor' found a value when none was expected in function specifiers
+The specifier 'CallInEditor' found a value when none was expected in function specifiers
